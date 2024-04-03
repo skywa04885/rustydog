@@ -1,0 +1,13 @@
+[package]
+name = "kinematics"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+nalgebra = { version = "0.32.5", features = ["serde", "serde-serialize"] }
+serde = "1.0.197"
+thiserror = "1.0.58"
+
+[lib]
+name = "kinematics"
+path = "lib.rs"

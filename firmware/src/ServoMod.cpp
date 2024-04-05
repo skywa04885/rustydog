@@ -125,6 +125,13 @@ bool ServoMod::transition(State state)
     return true;
 }
 
+/// @brief Get the current angle.
+/// @return the angle.
+int ServoMod::getAngle()
+{
+    return this->angle;
+}
+
 void ServoMod::stateEntry()
 {
     switch (this->state)

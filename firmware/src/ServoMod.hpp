@@ -101,6 +101,10 @@ public:
     /// @return Whether or not the given state will be transitioned to.
     bool transition(State state);
 
+    /// @brief Get the current angle.
+    /// @return the angle.
+    int getAngle();
+
 private:
     /// @brief Enter the current state.
     void stateEntry();

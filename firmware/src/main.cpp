@@ -7,6 +7,8 @@
 
 #include "config.hpp"
 #include "ServoMod.hpp"
+#include "DisplayMod.hpp"
+#include "MqttMod.hpp"
 
 const char *mqttClientIdentifier = "arduino";
 const char *mqttClientUsername = "arduino";
@@ -22,7 +24,9 @@ const String SUBTOPIC_SERVO_BUFFER_DRAIN = "/buffer/drain";
 const String SUBTOPIC_SERVO_BUFFER_PUSH = "/buffer/push";
 
 EthernetClient mqttEthernetClient;
-MQTTClient mqttClient;
+MQTTClient mqttClient(1024, 1024);
+
+DisplayMod displayMod;
 
 ServoMod servos[] = {
     ServoMod(3),
@@ -31,7 +35,7 @@ ServoMod servos[] = {
     ServoMod(6),
     ServoMod(7),
 };
-const int numberOfServos = sizeof(servos) / sizeof(ServoMod);
+int numberOfServos = sizeof(servos) / sizeof(ServoMod);
 
 void errorHandler()
 {
@@ -300,6 +304,8 @@ void setup()
   connectMqtt();
 
   setupServos();
+
+  displayMod.setup();
 }
 
 void loop()
@@ -313,4 +319,6 @@ void loop()
   {
     servo.loop();
   }
+
+  displayMod.loop();
 }
